@@ -1,0 +1,8 @@
+.NavBar {
+    width: 5rem;
+    height: calc(100vh - 10rem);
+    border: 2px solid #ccc;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,16 @@
+.Header {
+    padding: 10px;
+    height: 80px;
+    background-color: coral;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Header h3 {
+    margin: 0;
+}
+
+.Header figure {
+    margin: 0;
+}

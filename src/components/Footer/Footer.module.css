@@ -1,0 +1,13 @@
+.Footer {
+    height: 80px;
+    background-color: coral;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+}

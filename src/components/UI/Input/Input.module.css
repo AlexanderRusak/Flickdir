@@ -1,0 +1,6 @@
+.Input {
+    width: calc(100vw - 5rem);
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

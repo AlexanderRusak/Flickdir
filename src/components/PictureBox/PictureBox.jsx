@@ -1,35 +1,41 @@
 
+import { useEffect, useState } from "react"
 import { Layout } from "../../hoc/Layout"
-import { Button, Card } from "react-bootstrap"
-import { Text } from "../UI/Text/Text"
 import classes from "./PictureBox.module.css"
 import { Input } from "../UI/Input/Input"
+import { fetchData } from "./helpers"
+import { CardItem } from "../CardItem/Carditem"
+
 
 export const PictureBox = () => {
 
-    const pictureStyles = {
-        height: '215px',
-        width: '100%',
-        marginTop: '10px',
-        paddingLeft: '15px',
-        paddingRight: '15px',
+    const [searchString, setSearchString] = useState('');
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        getData(searchString);
+    }, [searchString]);
+
+    const getData = async (string) => {
+        const data = await fetchData(string);
+        setData(data)
     }
 
-    const onClick = () => {
-        console.log('click');
+    const onChangeHandler = (e) => {
+        setSearchString(e.target.value);
+    }
+
+    const renderItems = (items) => {
+        return items.map(item => <CardItem key={item.assets.preview.url} url={item.assets.preview.url} />)
     }
 
     return (
-        <Layout styles={classes.PictureBox}>
-            <Card>
-                <Card.Img style={pictureStyles} src='https://сезоны-года.рф/sites/default/files/images/journal/quotes.jpg' />
-                <Card.Body>
-                    <Button onClick={onClick} style={{ backgroundColor: 'coral' }} variant='light' size="sm" >
-                        <Text text='Bookmark it!' />
-                    </Button>
-                    <Input styles={{ width: '16rem' }} placeholder='Input tag...' />
-                </Card.Body>
-            </Card>
+        <Layout >
+            <Input value={searchString} onChange={onChangeHandler} placeholder='Search here ...' />
+            <Layout styles={classes.PictureBox}>
+                {data && renderItems(data)}
+            </Layout>
+
         </Layout>
     )
 }

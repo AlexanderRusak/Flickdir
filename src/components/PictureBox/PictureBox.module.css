@@ -1,4 +1,9 @@
 .PictureBox {
-    width: 20rem;
-    height: 30rem;
+  width: calc(100vw - 6rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: calc(100vh - 13rem);
+  overflow-y: visible;
+  overflow-x: hidden;
 }

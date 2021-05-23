@@ -1,4 +1,4 @@
-import PropsTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Text } from '../UI/Text/Text';
 
 
@@ -13,7 +13,7 @@ export const EmptyContent = ({ message }) => {
 }
 
 EmptyContent.propTypes = {
-    message: PropsTypes.string,
+    message: PropTypes.string,
 }
 
 EmptyContent.defaultProps = {

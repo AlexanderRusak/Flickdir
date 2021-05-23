@@ -19,11 +19,10 @@ export const Bookmarks = () => {
 
     }, [items])
 
-    console.log(items);
 
     return (
         <Layout styles={classes.PictureBox}>
-            {items.length ? renderItems(items, BOOKMARKS, onDeleteHandler) : <EmptyContent />}
+            {items && items.length ? renderItems(items, BOOKMARKS, onDeleteHandler) : <EmptyContent />}
         </Layout>
     )
 }

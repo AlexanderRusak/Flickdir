@@ -2,12 +2,13 @@ import { imagesApi } from "../../shutterStockApi/auth"
 import { queryParams } from "../../shutterStockApi/query"
 
 
-export const getImagesQuery = async (searchString) => {
+export const getImagesQuery = async (searchString, page) => {
 
     try {
         const result = await imagesApi.searchImages({
 
             'query': searchString,
+            "page": page,
             ...queryParams
 
         })
@@ -18,11 +19,14 @@ export const getImagesQuery = async (searchString) => {
 
 }
 
-export const fetchData = async (searchString) => {
-    const { data } = await getImagesQuery(searchString);
-    return data
+export const fetchData = async (searchString, pageNumber) => {
+    const result = await getImagesQuery(searchString, pageNumber);
+    const { total_count, data } = result;
+    return [data, total_count];
 
 }
+
+
 
 
 

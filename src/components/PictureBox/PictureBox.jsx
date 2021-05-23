@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react"
 import { Layout } from "../../hoc/Layout"
 import { Input } from "../UI/Input/Input"
-import { fetchData } from "./helpers"
 import { renderItems } from "../componentHelpers/helpers"
+import { EmptyContent } from "../EmptyContent/EmptyContent"
+import { PaginationItem } from "../UI/Pagination/Pagination"
+import { fetchData } from "./helpers"
 import classes from "./PictureBox.module.css"
 
 
@@ -15,9 +17,8 @@ export const PictureBox = () => {
     useEffect(() => {
         async function getData(string) {
             const data = await fetchData(string);
-            setData(data)
+            setData(searchString ? data : null)
         }
-
         getData(searchString);
     }, [searchString]);
 
@@ -30,6 +31,8 @@ export const PictureBox = () => {
     return (
         <Layout >
             <Input value={searchString} onChange={onChangeHandler} placeholder='Search here ...' />
+            <PaginationItem />
+            { !data && < EmptyContent message='No images here. Would you try to search for anything else?' />}
             <Layout styles={classes.PictureBox}>
                 {data && renderItems(data)}
             </Layout>

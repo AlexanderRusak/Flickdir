@@ -6,7 +6,7 @@ export const setImageItemToLS = (imageItem) => {
         currentBookmarks.push(imageItem);
         setItemsToLS(currentBookmarks)
     } else {
-        setItemsToLS([...imageItem])
+        setItemsToLS([imageItem])
     }
 
 }
@@ -16,9 +16,10 @@ export const getImagesFromLS = () => {
 }
 
 export const updateImagesFromLS = (url) => {
-    const deleted = getImagesFromLS().filter(image => image.assets.preview.url !== url);
+    const updatedItems = getImagesFromLS().filter(image => image.assets.preview.url !== url);
     localStorage.removeItem(BOOKMARKS);
-    setItemsToLS(deleted)
+    setItemsToLS(updatedItems);
+    return updatedItems;
 
 }
 

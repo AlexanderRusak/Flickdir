@@ -1,23 +1,29 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { Layout } from "../../hoc/Layout"
 import { BOOKMARKS } from "../../localStorage/constNames";
 import { getImagesFromLS } from "../../localStorage/helpers"
 import { renderItems } from "../componentHelpers/helpers";
+import { EmptyContent } from "../EmptyContent/EmptyContent";
 import classes from '../PictureBox/PictureBox.module.css'
 
 
 export const Bookmarks = () => {
 
-    const [imageItems, setImageItems] = useState([])
+    const [items, setItems] = useState(getImagesFromLS());
+
+    const onDeleteHandler = (items) => {
+        setItems(items);
+    }
 
     useEffect(() => {
-        const images = getImagesFromLS();
-        setImageItems(images);
-    }, [])
+
+    }, [items])
+
+    console.log(items);
 
     return (
         <Layout styles={classes.PictureBox}>
-            {renderItems(imageItems, BOOKMARKS)}
+            {items.length ? renderItems(items, BOOKMARKS, onDeleteHandler) : <EmptyContent />}
         </Layout>
     )
 }

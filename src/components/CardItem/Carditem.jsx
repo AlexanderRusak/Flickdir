@@ -1,36 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from "react-bootstrap"
 import { Input } from "../UI/Input/Input"
 import { Text } from "../UI/Text/Text"
+import { noop } from '../shared/noop';
 import { getImagesFromLS, updateImagesFromLS, setImageItemToLS } from '../../localStorage/helpers';
 import { getCurrentItem, removeCurrentItem } from './helpers';
 import { pictureStyles } from "../PictureBox/PictureSyles";
 
 
 
-export const CardItem = ({ url, imageItem, type }) => {
+export const CardItem = ({ url, imageItem, type, onDelete }) => {
 
-    const [isDisabled, setIsDisabled] = useState(false);
-    const [images, setImages] = useState(null)
-
-    useEffect(() => {
-        const images = getImagesFromLS();
-        const result = images ? getCurrentItem(images, url) : false
-        setIsDisabled(!!result);
-        setImages(images);
-        /* setIsDisabled(!!getCurrentItem(getImagesFromLS(), url)) */ /* it looks like magic code i dont't know which you prefer */
-
-    }, [])
+    const [images, setImages] = useState(getImagesFromLS())
+    const [isDisabled, setIsDisabled] = useState(images ? getCurrentItem(images, url) : false);
+    const [tag, setTag] = useState('');
 
     const onClickHandler = () => {
         setImageItemToLS(imageItem);
         setDisabledButton();
     }
 
-    const onClickRemoveItemHandler = () => {
-        updateImagesFromLS(url);
+    const onChangeHandler = (event) => {
+        setTag(event.target.value);
+        imageItem.userTag = event.target.value
+    }
 
+    const onClickRemoveItemHandler = () => {
+        const newItems = updateImagesFromLS(url);
+        onDelete(newItems);
     }
 
     const setDisabledButton = () => {
@@ -47,7 +45,7 @@ export const CardItem = ({ url, imageItem, type }) => {
                 <Button disabled={isDisabled && !type} onClick={!type ? onClickHandler : onClickRemoveItemHandler} style={{ backgroundColor: 'coral' }} variant='light' size="sm" >
                     <Text text={type ? 'Remove It' : 'Bookmark it!'} />
                 </Button>
-                {!isDisabled && !type ? <Input styles={{ width: '16rem' }} placeholder='Input tag...' /> : null}
+                {!isDisabled && !type ? <Input onChange={onChangeHandler} value={tag} styles={{ width: '16rem' }} placeholder='Input tag...' /> : null}
             </Card.Body>
         </Card>
     )
@@ -55,9 +53,13 @@ export const CardItem = ({ url, imageItem, type }) => {
 
 CardItem.propTypes = {
     url: PropTypes.string.isRequired,
-    imageId: PropTypes.string.isRequired,
+    imageId: PropTypes.string,
+    type: PropTypes.string,
+    onDelete: PropTypes.func,
 }
 
 CardItem.defaultProps = {
     type: '',
+    imageId: '',
+    onDelete: noop,
 }

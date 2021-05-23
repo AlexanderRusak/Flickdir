@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from "react"
 import { Layout } from "../../hoc/Layout"
-import classes from "./PictureBox.module.css"
 import { Input } from "../UI/Input/Input"
 import { fetchData } from "./helpers"
-import { CardItem } from "../CardItem/Carditem"
+import { renderItems } from "../componentHelpers/helpers"
+import classes from "./PictureBox.module.css"
 
 
 export const PictureBox = () => {
@@ -13,20 +13,18 @@ export const PictureBox = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
+        async function getData(string) {
+            const data = await fetchData(string);
+            setData(data)
+        }
+
         getData(searchString);
     }, [searchString]);
 
-    const getData = async (string) => {
-        const data = await fetchData(string);
-        setData(data)
-    }
+
 
     const onChangeHandler = (e) => {
         setSearchString(e.target.value);
-    }
-
-    const renderItems = (items) => {
-        return items.map(item => <CardItem key={item.assets.preview.url} url={item.assets.preview.url} />)
     }
 
     return (

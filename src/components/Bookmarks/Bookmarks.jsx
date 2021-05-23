@@ -1,12 +1,23 @@
+import { useEffect, useState } from "react"
 import { Layout } from "../../hoc/Layout"
+import { BOOKMARKS } from "../../localStorage/constNames";
+import { getImagesFromLS } from "../../localStorage/helpers"
+import { renderItems } from "../componentHelpers/helpers";
+import classes from '../PictureBox/PictureBox.module.css'
 
 
-export const Bookmarks=()=>{
+export const Bookmarks = () => {
 
+    const [imageItems, setImageItems] = useState([])
 
-    return(
-        <Layout>
-            <h1>1212</h1>
+    useEffect(() => {
+        const images = getImagesFromLS();
+        setImageItems(images);
+    }, [])
+
+    return (
+        <Layout styles={classes.PictureBox}>
+            {renderItems(imageItems, BOOKMARKS)}
         </Layout>
     )
 }

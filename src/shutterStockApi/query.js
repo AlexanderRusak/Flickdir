@@ -5,3 +5,4 @@ export const queryParams = {
     "sort": "popular",
     "view": "minimal"
 };
+

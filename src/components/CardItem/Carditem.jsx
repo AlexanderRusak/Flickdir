@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from "react-bootstrap"
 import { Input } from "../UI/Input/Input"
@@ -8,13 +8,13 @@ import { getImagesFromLS, updateImagesFromLS, setImageItemToLS } from '../../loc
 import { getCurrentItem, removeCurrentItem } from './helpers';
 import { pictureStyles } from "../PictureBox/PictureSyles";
 
-
-
 export const CardItem = ({ url, imageItem, type, onDelete }) => {
 
     const [images, setImages] = useState(getImagesFromLS())
     const [isDisabled, setIsDisabled] = useState(images ? getCurrentItem(images, url) : false);
     const [tag, setTag] = useState('');
+
+
 
     const onClickHandler = () => {
         setImageItemToLS(imageItem);

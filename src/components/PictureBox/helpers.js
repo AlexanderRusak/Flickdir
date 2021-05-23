@@ -29,4 +29,3 @@ export const fetchData = async (searchString, pageNumber) => {
 
 
 
-

@@ -12,7 +12,7 @@ export const setImageItemToLS = (imageItem) => {
 }
 
 export const getImagesFromLS = () => {
-    return JSON.parse(localStorage.getItem(BOOKMARKS));
+    return JSON.parse(localStorage.getItem(BOOKMARKS)) || [];
 }
 
 export const updateImagesFromLS = (url) => {

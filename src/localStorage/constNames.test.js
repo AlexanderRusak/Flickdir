@@ -1,6 +1,7 @@
 import { getImagesFromLS, updateImagesFromLS } from "./helpers"
 
 describe('getImagesFromLS', () => {
+
     test('should return array of image items', () => {
         expect(getImagesFromLS()).toBeTruthy();
         expect(getImagesFromLS()).toBeInstanceOf(Array);

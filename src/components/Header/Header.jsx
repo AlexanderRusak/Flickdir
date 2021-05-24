@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaUserCircle } from 'react-icons/fa'
-import { Icon } from '../UI/Icon/Icon';
+/* import { FaUserCircle } from 'react-icons/fa'
+import { Icon } from '../UI/Icon/Icon'; */
 import classes from "./Header.module.css"
 
 export const Header = () => {
@@ -9,10 +9,10 @@ export const Header = () => {
         <header className={classes.Header}>
             
             <h3>Image Finder</h3>
-            <figure>
+            {/* <figure>
                 <Icon iconElement={FaUserCircle} styles={{color:'black'}}/>     
                 <figcaption></figcaption>
-            </figure>
+            </figure> */}
         </header>
     )
 

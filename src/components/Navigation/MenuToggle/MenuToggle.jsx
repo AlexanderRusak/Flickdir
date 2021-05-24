@@ -11,7 +11,7 @@ const MenuToggle = props => {
     cls.push('fa-times')
     cls.push(classes.open)
   } else {
-    cls.push('fa-bars')
+    cls.push('fa-user')
   }
 
   return (

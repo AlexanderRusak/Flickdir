@@ -1,7 +1,9 @@
+import { COUNT_OF_ITEMS } from "./queryConst";
+
 export const queryParams = {
     "image_type": "photo",
-    "page": 5,
-    "per_page": 10,
+    "per_page": COUNT_OF_ITEMS,
     "sort": "popular",
     "view": "minimal"
 };
+

@@ -1,37 +1,55 @@
 
 import { useEffect, useState } from "react"
+import useDebounce from "./debouncer"
 import { Layout } from "../../hoc/Layout"
-import classes from "./PictureBox.module.css"
 import { Input } from "../UI/Input/Input"
+import { renderItems } from "../componentHelpers/helpers"
+import { EmptyContent } from "../EmptyContent/EmptyContent"
+import { PaginationItem } from "../UI/Pagination/Pagination"
 import { fetchData } from "./helpers"
-import { CardItem } from "../CardItem/Carditem"
+import classes from "./PictureBox.module.css"
 
 
 export const PictureBox = () => {
 
+
     const [searchString, setSearchString] = useState('');
     const [data, setData] = useState(null);
+    const [page, setPage] = useState(1);
+    const [countOfData, setCountOfData] = useState(0);
+
+    const debouncedSearchQuery = useDebounce(searchString);
 
     useEffect(() => {
-        getData(searchString);
-    }, [searchString]);
+        async function getData(string) {
 
-    const getData = async (string) => {
-        const data = await fetchData(string);
-        setData(data)
+            const [data, total_count] = await fetchData(string, page);
+            console.log(data, total_count);
+            setCountOfData(total_count)
+            setData(string ? data : null)
+        }
+
+        getData(debouncedSearchQuery);
+
+    }, [page, countOfData, debouncedSearchQuery]);
+
+    const onClichHandler = (value) => {
+        setPage(page + value)
     }
 
-    const onChangeHandler = (e) => {
+    function onChangeHandler(e) {      //i used to function declaration for debouncer function visible
         setSearchString(e.target.value);
     }
 
-    const renderItems = (items) => {
-        return items.map(item => <CardItem key={item.assets.preview.url} url={item.assets.preview.url} />)
-    }
+
 
     return (
         <Layout >
             <Input value={searchString} onChange={onChangeHandler} placeholder='Search here ...' />
+            {/* I  did it  without magic code */}
+            {data && countOfData && debouncedSearchQuery && <PaginationItem onClick={onClichHandler} pageNumber={page} count={countOfData} />}
+            {!data && !debouncedSearchQuery && < EmptyContent message='No images here. Would you try to search for anything else?' />}
+            {debouncedSearchQuery && data && !countOfData && <EmptyContent message="Nothing found" />}
             <Layout styles={classes.PictureBox}>
                 {data && renderItems(data)}
             </Layout>

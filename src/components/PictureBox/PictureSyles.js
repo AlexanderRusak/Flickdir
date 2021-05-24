@@ -7,3 +7,4 @@ export const pictureStyles = {
     boxShadow: '0px 5px 5px  #ccc'
 
 }
+

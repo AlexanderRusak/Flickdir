@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import useDebounce from "./debouncer"
 import { Layout } from "../../hoc/Layout"
 import { Input } from "../UI/Input/Input"
@@ -17,6 +17,7 @@ export const PictureBox = () => {
     const [data, setData] = useState(null);
     const [page, setPage] = useState(1);
     const [countOfData, setCountOfData] = useState(0);
+
 
     const debouncedSearchQuery = useDebounce(searchString);
 

@@ -1,25 +1,27 @@
 .Drawer {
     position: fixed;
-    left: 0;
+    left: 100vw;
     top: 0;
     bottom: 0;
     width: 80%;
-    max-width: 300px;
+    max-width: 200px;
     padding: 20px 10px;
     box-sizing: border-box;
-    background: #fff;
-    transform: translateX(0px);
+    background: coral;
+    transform: translateX(-200px);
     transition: transform .22s ease-in;
     z-index: 90;
 }
 
 .Drawer.close {
-    transform: translateX(-300px);
+    transform: translateX(300px);
 }
 
 .Drawer ul {
+
     list-style: none;
     margin: 0;
+    margin-top: 20px;
     padding: 0;
 }
 
@@ -27,14 +29,16 @@
     margin-bottom: 15px;
 }
 
-.Drawer ul li a {
-    color: #363d54;
+.Drawer ul li button p {
+    color: #fff;
+    font-weight: 700;
     font-size: 30px;
     text-decoration: none;
-    background-color: #fff;
+    background-color: transparent;
     position: relative;
     padding: 0 20px 10px 20px;
     transition: opacity .3s;
+
 }
 
 .Drawer ul li a:hover, .active {

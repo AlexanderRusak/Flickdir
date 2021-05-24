@@ -14,5 +14,6 @@
 }
 
 .MenuToggle.open {
-    left: calc(100vw - 10rem);
+    left: calc(100vw - 15rem);
+    color: coral;
 }

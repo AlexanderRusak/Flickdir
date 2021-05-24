@@ -6,7 +6,7 @@ import classes from './Backdrop.module.css';
 const Backdrop = ({ onClick }) => {
   return (
     <div
-      tabIndex='0'
+      tabIndex={0}
       aria-label='button'
       type='button'
       role='button'
@@ -20,5 +20,6 @@ const Backdrop = ({ onClick }) => {
 Backdrop.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
+
 
 export default Backdrop;

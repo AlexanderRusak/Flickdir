@@ -6,26 +6,41 @@ import classes from './NavigationLayout.module.css'
 class NavigationLayout extends Component {
 
     state = {
-        menu: false
+        menu: false,
+        isLogin: false
+    }
+
+    componentDidMount() {
+        this.setState({
+            isLogin: !!localStorage.getItem('idToken')
+        })
     }
 
     toggleMenuHandler = () => {
+        const { menu } = this.state;
         this.setState({
-            menu: !this.state.menu
+            menu: !menu
         })
     }
 
     render() {
+        const { menu, isLogin } = this.state;
+        const { children } = this.props;
+        console.log(isLogin);
+
+
         return (
             <div className={classes.Layout}>
-                <Drawer />
+                {isLogin && <Drawer
+                    isOpen={menu}
+                />}
                 <MenuToggle
                     onToggle={this.toggleMenuHandler}
-                    isOpen={this.state.menu}
+                    isOpen={menu}
                 />
 
                 <main>
-                    {this.props.children}
+                    {children}
                 </main>
             </div>
         )

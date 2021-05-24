@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { DEBOUNCED_DELAY } from '../../shutterStockApi/queryConst';
 
 
-export default function useDebounce(value, delay) {
+export default function useDebounce(value) {
 
     const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -9,15 +10,13 @@ export default function useDebounce(value, delay) {
         () => {
             const handler = setTimeout(() => {
                 setDebouncedValue(value);
-            }, delay);
+            }, DEBOUNCED_DELAY);
 
 
             return () => {
                 clearTimeout(handler);
             };
-        },
-
-        [value]
+        }, [value]
     );
 
     return debouncedValue;

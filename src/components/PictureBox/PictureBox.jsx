@@ -18,10 +18,11 @@ export const PictureBox = () => {
     const [page, setPage] = useState(1);
     const [countOfData, setCountOfData] = useState(0);
 
-    const debouncedSearchQuery = useDebounce(searchString, 1000);
+    const debouncedSearchQuery = useDebounce(searchString);
 
     useEffect(() => {
         async function getData(string) {
+
             const [data, total_count] = await fetchData(string, page);
             console.log(data, total_count);
             setCountOfData(total_count)

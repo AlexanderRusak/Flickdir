@@ -1,5 +1,6 @@
 .Content {
     height: calc(100vh - 8rem);
     display: flex;
+    align-items: center;
     flex-direction: row;
 }

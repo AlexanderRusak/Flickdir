@@ -39,6 +39,7 @@ class NavigationLayout extends Component {
                     isOpen={menu}
                     onClose={this.menuCloseHandler}
                     isLogin={this.props.token}
+                    userName={this.props.email}
                 />}
                 <MenuToggle
                     onToggle={this.toggleMenuHandler}
@@ -55,7 +56,8 @@ class NavigationLayout extends Component {
 }
 function mapStateToProps(state) {
     return {
-        token: !!state.auth.token
+        token: !!state.auth.token,
+        email: state.auth.email,
     }
 }
 

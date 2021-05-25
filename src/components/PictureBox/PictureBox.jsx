@@ -40,9 +40,8 @@ export const PictureBox = () => {
 
     function onChangeHandler(e) {      //i used to function declaration for debouncer function visible
         setSearchString(e.target.value);
+
     }
-
-
 
     return (
         <Layout >

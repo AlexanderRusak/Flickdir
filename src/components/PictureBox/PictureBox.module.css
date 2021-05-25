@@ -1,9 +1,13 @@
 .PictureBox {
-  width: calc(100vw - 6rem);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  height: calc(100vh - 16rem);
-  overflow-y: visible;
-  overflow-x: hidden;
+    width: calc(100vw - 6rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: calc(100vh - 16rem);
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+
+.card-item {
+    object-fit: cover;
 }

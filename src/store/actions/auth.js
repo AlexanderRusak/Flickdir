@@ -7,13 +7,13 @@ export function login(formControls, type) {
         try {
             dispatch(loginStart());
             const { data } = await axios.post(type, authData(formControls));
-
+            console.log(data);
 
             const expirationDate = new Date(new Date().getTime() + 900 * 1000)
 
             localStorage.setItem('token', data.idToken)
             localStorage.setItem('expirationDate', expirationDate)
-            dispatch(loginSuccess(data.idToken));
+            dispatch(loginSuccess(data.idToken, data.email));
             dispatch(autoLogout(data.expiresIn));
         } catch (err) {
             dispatch(loginError(err))
@@ -22,10 +22,11 @@ export function login(formControls, type) {
 }
 
 
-export function loginSuccess(token) {
+export function loginSuccess(token, email) {
     return {
         type: AUTH_SUCCESS,
-        token
+        token,
+        email
     }
 }
 

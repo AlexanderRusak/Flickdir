@@ -1,6 +1,7 @@
 import { AUTH_ERROR, AUTH_LOGOUT, AUTH_START, AUTH_SUCCESS } from "../actions/actionTypes";
 
 const initialState = {
+    email: '',
     token: null,
     isError: false,
 }
@@ -11,6 +12,7 @@ export default function authReducer(state = initialState, action) {
             return {
                 ...state,
                 token: action.token,
+                email: action.email,
             }
 
         case AUTH_START:

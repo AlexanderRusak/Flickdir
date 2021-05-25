@@ -35,7 +35,7 @@ class Drawer extends PureComponent {
       <>
         <nav className={cls.join(' ')}>
           <Icon iconElement={FaUserCircle} size={50} styles={{ color: 'black' }} />
-          <Text text='UserName' styles={{ fontSize: '25px' }} />
+          <Text text={this.props.userName} styles={{ fontSize: '12px' }} />
           <ul>
             {isLogin && this.renderLinks()}
           </ul>

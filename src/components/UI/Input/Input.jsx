@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {noop} from '../../shared/noop';
+import { noop } from '../../shared/noop';
 import { Form } from "react-bootstrap"
 import classes from "./Input.module.css"
 
@@ -10,8 +10,12 @@ export const Input = ({ placeholder, styles, type, onChange, value }) => {
         onChange(event);
     }
 
+    const onSubmitHandler = (event) => {
+        event.preventDefault()
+    }
+
     return (
-        <Form className={classes.Input}>
+        <Form onSubmit={onSubmitHandler} className={classes.Input}>
             <Form.Group>
                 <Form.Control value={value} onChange={onChangeHandler} style={styles} type={type} placeholder={placeholder} />
             </Form.Group>

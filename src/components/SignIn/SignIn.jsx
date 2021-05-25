@@ -3,10 +3,12 @@ import { Button } from "react-bootstrap";
 import { Layout } from "../../hoc/Layout"
 import classes from "../Content/Content.module.css";
 import { Text } from "../UI/Text/Text";
-import { Redirect, withRouter } from 'react-router-dom'
 import { SIGN_IN, SIGN_UP } from '../../firebase/firebaseApi';
-import { auth, renderInputs, validateControl } from "./helpers";
+import { renderInputs, validateControl } from "./helpers";
+import { connect } from 'react-redux'
 import classesName from "./SignIn.module.css";
+import { login } from "../../store/actions/auth";
+import Alert from "../UI/Alert/Alert";
 
 
 class SignIn extends Component {
@@ -14,7 +16,6 @@ class SignIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogin: false,
             isFormValid: false,
             formControls: {
                 email: {
@@ -46,6 +47,7 @@ class SignIn extends Component {
     }
 
 
+
     onChangeHandler = (event, controlName) => {
         const formControls = { ...this.state.formControls }
         const control = { ...formControls[controlName] }
@@ -71,34 +73,20 @@ class SignIn extends Component {
 
     loginHandler = async () => {
         const { formControls } = this.state;
-        const res = await auth(formControls, SIGN_IN);
-        if (res) {
-            const { data } = res;
-            localStorage.setItem('idToken', data.idToken)
-            this.setState({
-                isLogin: true
-            })
-        }
+        this.props.loginUser(formControls, SIGN_IN)
     }
 
     registrationHandler = async () => {
         const { formControls } = this.state;
-        const res = await auth(formControls, SIGN_UP);
-        if (res) {
-            <Redirect to='/search' />
-            const { data } = res;
-            localStorage.setItem('idToken', data.idToken)
-            this.setState({
-                isLogin: true
-            })
-        }
+        this.props.loginUser(formControls, SIGN_UP)
     }
 
     render() {
-        const { formControls, isFormValid, isLogin } = this.state;
+        const { formControls, isFormValid } = this.state;
+        console.log(this.props.isError);
         return (
             <Layout styles={classes.Content} >
-                {isLogin && <Redirect to='/search' />}
+               {/*  <Alert isShow={this.props.isError} text={'error'} /> */}
                 <Layout styles={classesName.SignIn}>
                     <h5>Wellcome to Image Finder</h5>
                     {renderInputs(formControls, this.onChangeHandler)}
@@ -113,4 +101,17 @@ class SignIn extends Component {
 
 }
 
-export default withRouter(SignIn);
+function mapStateToProps(state) {
+    return {
+        isLogin: state.auth.isLogin,
+        isError: state.auth.isError,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loginUser: (type, formControls) => dispatch(login(type, formControls))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

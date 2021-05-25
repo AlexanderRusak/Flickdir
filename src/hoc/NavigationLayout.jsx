@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
+import { connect } from 'react-redux'
 import MenuToggle from '../components/Navigation/MenuToggle/MenuToggle';
 import Drawer from '../components/Navigation/Drawer/Drawer';
 import classes from './NavigationLayout.module.css'
@@ -22,21 +23,27 @@ class NavigationLayout extends Component {
             menu: !menu
         })
     }
+    menuCloseHandler = () => {
+        this.setState({
+            menu: false
+        })
+    }
 
     render() {
-        const { menu, isLogin } = this.state;
+        const { menu } = this.state;
         const { children } = this.props;
-        console.log(isLogin);
-
 
         return (
             <div className={classes.Layout}>
-                {isLogin && <Drawer
+                {this.props.token && <Drawer
                     isOpen={menu}
+                    onClose={this.menuCloseHandler}
+                    isLogin={this.props.token}
                 />}
                 <MenuToggle
                     onToggle={this.toggleMenuHandler}
                     isOpen={menu}
+                    hide={this.props.token}
                 />
 
                 <main>
@@ -46,5 +53,11 @@ class NavigationLayout extends Component {
         )
     }
 }
+function mapStateToProps(state) {
+    return {
+        token: !!state.auth.token
+    }
+}
 
-export default NavigationLayout
+
+export default connect(mapStateToProps, null)(NavigationLayout)

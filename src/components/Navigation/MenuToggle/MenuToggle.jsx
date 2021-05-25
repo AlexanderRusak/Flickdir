@@ -16,6 +16,7 @@ const MenuToggle = props => {
 
   return (
     <i
+      style={{ display: props.hide ? 'block' : 'none' }}
       className={cls.join(' ')}
       onClick={props.onToggle}
     />

@@ -1,63 +1,31 @@
-import React, { Component } from 'react'
+import { PureComponent } from 'react'
 import classes from './Drawer.module.css'
 import { FaUserCircle } from 'react-icons/fa'
 import { Icon } from '../../UI/Icon/Icon';
 import Backdrop from '../../UI/Backdrop/Backdrop'
 import { Link } from 'react-router-dom'
 import { Text } from '../../UI/Text/Text';
-import { Button } from 'react-bootstrap';
 
-
-
-class Drawer extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLogin: false
-    }
-  }
-
-  componentDidMount() {
-    const idToken = localStorage.getItem('idToken');
-    this.setState(
-      {
-        isLogin: !!idToken
-      }
-    );
-    console.log(!!idToken);
-  }
-
-  onClickHandler = () => {
-    this.setState({
-      isLogin: false
-    })
-    localStorage.removeItem('idToken')
-  }
+class Drawer extends PureComponent {
 
 
   renderLinks() {
 
     return (
       <li >
-        <Link to={{
-          pathname: '/',
-          idToken: false
-        }}>
-          <Button onClick={this.onClickHandler} variant="default"><Text text='Logout' /></Button>
-        </Link>
+        <Link to='/logout' style={{ textDecoration: 'none' }}>
 
+          <Text text='Logout' styles={{ fontSize: '20px', color: '#fff' }} />
+        </Link>
       </li >
     )
 
   }
 
   render() {
-    const { isLogin } = this.state;
-    console.log(isLogin);
-
-
+    const { isLogin } = this.props;
     const cls = [classes.Drawer]
+    console.log(isLogin);
 
     if (!this.props.isOpen) {
       cls.push(classes.close)
@@ -69,7 +37,7 @@ class Drawer extends Component {
           <Icon iconElement={FaUserCircle} size={50} styles={{ color: 'black' }} />
           <Text text='UserName' styles={{ fontSize: '25px' }} />
           <ul>
-            {this.renderLinks()}
+            {isLogin && this.renderLinks()}
           </ul>
         </nav>
         { this.props.isOpen ? <Backdrop onClick={this.props.onClose} /> : null}

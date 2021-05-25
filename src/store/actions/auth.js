@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { authData } from "../../components/SignIn/helpers";
-import { AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from "./actionTypes";
+import { AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT, AUTH_START } from "./actionTypes";
 
 export function login(formControls, type) {
     return async dispatch => {
         try {
+            dispatch(loginStart());
             const { data } = await axios.post(type, authData(formControls));
 
 
@@ -35,7 +36,14 @@ export function loginError() {
         isError: true,
 
     }
+}
 
+export function loginStart() {
+    return {
+        type: AUTH_START,
+        isError: false,
+
+    }
 }
 
 export function autoLogout(time) {

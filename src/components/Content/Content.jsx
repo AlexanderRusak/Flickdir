@@ -18,7 +18,7 @@ export const Content = () => {
 
     useEffect(() => {
         dispatch(autoLogin())
-    }, [token, dispatch])
+    }, [dispatch])
 
     let routes = (
         <>

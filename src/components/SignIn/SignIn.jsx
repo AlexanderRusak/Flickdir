@@ -8,7 +8,7 @@ import { renderInputs, validateControl } from "./helpers";
 import { connect } from 'react-redux'
 import classesName from "./SignIn.module.css";
 import { login } from "../../store/actions/auth";
-import Alert from "../UI/Alert/Alert";
+import { Alert } from "../UI/Alert/Alert";
 
 
 class SignIn extends Component {
@@ -49,6 +49,7 @@ class SignIn extends Component {
 
 
     onChangeHandler = (event, controlName) => {
+
         const formControls = { ...this.state.formControls }
         const control = { ...formControls[controlName] }
 
@@ -82,11 +83,15 @@ class SignIn extends Component {
     }
 
     render() {
+        const { isError } = this.props;
+
+
         const { formControls, isFormValid } = this.state;
+
         console.log(this.props.isError);
         return (
             <Layout styles={classes.Content} >
-               {/*  <Alert isShow={this.props.isError} text={'error'} /> */}
+                <Alert isShow={isError} text={'Oops something went wrong!'} />
                 <Layout styles={classesName.SignIn}>
                     <h5>Wellcome to Image Finder</h5>
                     {renderInputs(formControls, this.onChangeHandler)}

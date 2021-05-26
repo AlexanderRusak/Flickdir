@@ -7,7 +7,6 @@ export function login(formControls, type) {
         try {
             dispatch(loginStart());
             const { data } = await axios.post(type, authData(formControls));
-            console.log(data);
 
             const expirationDate = new Date(new Date().getTime() + 900 * 1000)
 

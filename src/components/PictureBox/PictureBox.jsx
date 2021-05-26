@@ -22,17 +22,16 @@ export const PictureBox = () => {
     const debouncedSearchQuery = useDebounce(searchString);
 
     useEffect(() => {
-        async function getData(string) {
 
+        async function getData(string) {
             const [data, total_count] = await fetchData(string, page);
             console.log(data, total_count);
             setCountOfData(total_count)
             setData(string ? data : null)
         }
-
         getData(debouncedSearchQuery);
 
-    }, [page, countOfData, debouncedSearchQuery]);
+    }, [debouncedSearchQuery, page, countOfData]);
 
     const onClichHandler = (value) => {
         setPage(page + value)

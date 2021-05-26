@@ -36,7 +36,7 @@ export const CardItem = ({ url, imageItem, type, userTag, onDelete }) => {
     }
     console.log(userTag);
     return (
-        <Card style={{ width: '28rem', height: '25rem', margin: '10px' }}>
+        <Card style={{ width: '28rem', height: '28rem', margin: '10px' }}>
             <Card.Header style={{ backgroundColor: '#fff', fontSize: '1rem' }} >{userTag}</Card.Header>
             <Card.Img style={pictureStyles} src={url} />
             <Card.Body>
@@ -54,10 +54,13 @@ CardItem.propTypes = {
     imageId: PropTypes.string,
     type: PropTypes.string,
     onDelete: PropTypes.func,
+    userTag: PropTypes.string
 }
 
 CardItem.defaultProps = {
+    url: '',
     type: '',
     imageId: '',
     onDelete: noop,
+    userTag: ''
 }

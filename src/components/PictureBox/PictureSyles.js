@@ -4,7 +4,7 @@ export const pictureStyles = {
     marginTop: '15px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    boxShadow: '0px 5px 5px  #ccc'
+    boxShadow: '0px 5px 5px  #ccc',
+    objectFit: 'contain',
 
 }
-

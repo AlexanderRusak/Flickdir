@@ -8,6 +8,8 @@
     overflow-x: hidden;
 }
 
-.card-item {
-    object-fit: cover;
+@media screen and (max-width:368px) {
+    .PictureBox {
+        height: calc(100vh - 300px);
+    }
 }

@@ -57,8 +57,6 @@ class SignIn extends Component {
         control.touched = true
         control.valid = validateControl(control.value, control.validation)
 
-        console.log(control.valid);
-
         formControls[controlName] = control
 
         let isFormValid = true
@@ -88,7 +86,6 @@ class SignIn extends Component {
 
         const { formControls, isFormValid } = this.state;
 
-        console.log(this.props.isError);
         return (
             <Layout styles={classes.Content} >
                 <Alert isShow={isError} text={'Oops something went wrong!'} />

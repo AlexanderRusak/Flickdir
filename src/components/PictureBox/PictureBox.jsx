@@ -25,7 +25,6 @@ export const PictureBox = () => {
 
         async function getData(string) {
             const [data, total_count] = await fetchData(string, page);
-            console.log(data, total_count);
             setCountOfData(total_count)
             setData(string ? data : null)
         }

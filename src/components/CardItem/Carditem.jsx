@@ -34,7 +34,7 @@ export const CardItem = ({ url, imageItem, type, userTag, onDelete }) => {
         const newImages = removeCurrentItem(images, url);
         setImages(newImages);
     }
-    console.log(userTag);
+
     return (
         <Card style={{ width: '28rem', height: '28rem', margin: '10px' }}>
             <Card.Header style={{ backgroundColor: '#fff', fontSize: '1rem' }} >{userTag}</Card.Header>

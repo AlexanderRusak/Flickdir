@@ -8,13 +8,11 @@ import { getImagesFromLS, updateImagesFromLS, setImageItemToLS } from '../../loc
 import { getCurrentItem, removeCurrentItem } from './helpers';
 import { pictureStyles } from "../PictureBox/PictureSyles";
 
-export const CardItem = ({ url, imageItem, type, onDelete }) => {
+export const CardItem = ({ url, imageItem, type, userTag, onDelete }) => {
 
     const [images, setImages] = useState(getImagesFromLS())
     const [isDisabled, setIsDisabled] = useState(images ? getCurrentItem(images, url) : false);
     const [tag, setTag] = useState('');
-
-
 
     const onClickHandler = () => {
         setImageItemToLS(imageItem);
@@ -36,10 +34,10 @@ export const CardItem = ({ url, imageItem, type, onDelete }) => {
         const newImages = removeCurrentItem(images, url);
         setImages(newImages);
     }
-
+    console.log(userTag);
     return (
-
         <Card style={{ width: '28rem', height: '25rem', margin: '10px' }}>
+            <Card.Header style={{ backgroundColor: '#fff', fontSize: '1rem' }} >{userTag}</Card.Header>
             <Card.Img style={pictureStyles} src={url} />
             <Card.Body>
                 <Button disabled={isDisabled && !type} onClick={!type ? onClickHandler : onClickRemoveItemHandler} style={{ backgroundColor: 'coral' }} variant='light' size="sm" >
